@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>tip-calculator-app</title>
+	</head>
+	<body>
+		<header><img src="SPLITTER.svg" alt="SPLITTER" /></header>
+		<main>
+			<section class="menu-1">
+				<label>
+					<p class="p-1">Bill</p>
+					<div class="button">
+						<img src="$.svg" alt="" />
+						<input id="inputPrix" type="number" placeholder="0" id="" />
+					</div>
+				</label>
+				<p class="p-1">Select Tip %</p>
+				<div>
+					<button id="Tip1" class="black">5%</button>
+					<button id="Tip2" class="black">10%</button>
+					<button id="Tip3" class="black">15%</button>
+				</div>
+				<div>
+					<button id="Tip4" class="black">25%</button>
+					<button id="Tip5" class="black">50%</button>
+					<input id="Tip6" class="white" placeholder="Custom" />
+				</div>
+				<label>
+					<p class="p-1">Number of People</p>
+					<div class="button">
+						<img src="Group 8 (2).svg" alt="" />
+						<input id="inputdvalue" type="number" placeholder="0" id="" />
+					</div>
+				</label>
+			</section>
+			<section class="menu-2">
+				<p>Tip Amount</p>
+				<p>/ person</p>
+				<p id="TipAmount2">$0.00</p>
+				<p>Total</p>
+				<p>/ person</p>
+				<p id="TipAmount1">$0.00</p>
+				<button>RESET</button>
+			</section>
+		</main>
+		<script src="main.js"></script>
+	</body>
+</html>
