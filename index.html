@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -12,38 +12,52 @@
 			<section class="menu-1">
 				<label>
 					<p class="p-1">Bill</p>
-					<div class="button">
+					<div class="input">
 						<img src="$.svg" alt="" />
-						<input id="inputPrix" type="number" placeholder="0" id="" />
+						<input id="inputPrix" type="number" placeholder="0" min="0" />
 					</div>
 				</label>
 				<p class="p-1">Select Tip %</p>
-				<div>
-					<button id="Tip1" class="black">5%</button>
-					<button id="Tip2" class="black">10%</button>
-					<button id="Tip3" class="black">15%</button>
-				</div>
-				<div>
-					<button id="Tip4" class="black">25%</button>
-					<button id="Tip5" class="black">50%</button>
-					<input id="Tip6" class="white" placeholder="Custom" />
+				<div class="grid">
+					<button class="btn1" id="Tip1">5%</button>
+					<button class="btn1" id="Tip2">10%</button>
+					<button class="btn1" id="Tip3">15%</button>
+					<button class="btn1" id="Tip4">25%</button>
+					<button class="btn1" id="Tip5">50%</button>
+					<input id="Tip6" class="btn" placeholder="Custom" />
 				</div>
 				<label>
-					<p class="p-1">Number of People</p>
-					<div class="button">
+					<div class="row">
+						<p class="p-1">Number of People</p>
+						<p class="error" id="errorPersonne">Can't be zero</p>
+					</div>
+					<div class="input">
 						<img src="Group 8 (2).svg" alt="" />
-						<input id="inputdvalue" type="number" placeholder="0" id="" />
+						<input id="inputdvalue" type="number" placeholder="0" min="0" />
 					</div>
 				</label>
 			</section>
 			<section class="menu-2">
-				<p>Tip Amount</p>
-				<p>/ person</p>
-				<p id="TipAmount2">$0.00</p>
-				<p>Total</p>
-				<p>/ person</p>
-				<p id="TipAmount1">$0.00</p>
-				<button>RESET</button>
+				<div class="gap">
+					<div class="row">
+						<div class="person">
+							<p class="p-2">Tip Amount</p>
+							<p class="p-3">/ person</p>
+						</div>
+						<div>
+							<h2 id="TipAmount2">$0.00</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="person">
+							<p class="p-2">Total</p>
+							<p class="p-3">/ person</p>
+						</div>
+						<div><h2 id="TipAmount1">$0.00</h2></div>
+					</div>
+				</div>
+
+				<button disabled class="reste">RESET</button>
 			</section>
 		</main>
 		<script src="main.js"></script>

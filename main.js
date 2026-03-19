@@ -1,10 +1,5 @@
 let inputPrix = document.querySelector("#inputPrix");
 
-let buttonTip1 = document.querySelector("#Tip1");
-let buttonTip2 = document.querySelector("#Tip2");
-let buttonTip3 = document.querySelector("#Tip3");
-let buttonTip4 = document.querySelector("#Tip4");
-let buttonTip5 = document.querySelector("#Tip5");
 let inputTip6 = document.querySelector("#Tip6");
 
 let inputdvalue = document.querySelector("#inputdvalue");
@@ -12,63 +7,61 @@ let inputdvalue = document.querySelector("#inputdvalue");
 let TipAmount1 = document.querySelector("#TipAmount1");
 let TipAmount2 = document.querySelector("#TipAmount2");
 
+let resetBtn = document.querySelector(".reste");
+
+let tipValues = [5, 10, 15, 25, 50];
+let tipButtons = [];
+for (let i = 0; i < tipValues.length; i++) {
+	tipButtons[i] = document.querySelector("#Tip" + (i + 1));
+}
+
 let prix = 0;
 let tip = 0;
 let nombrePersonne = 0;
 
-function calculerTipAmoutn(prix, tip, nbrPersonne) {
-	let tipAmount = 0;
-
-	tipAmount = (tip * prix) / nbrPersonne;
-
-	return tipAmount;
+function calculerTipAmount(prix, tip, nbrPersonne) {
+	return (prix * tip) / nbrPersonne;
 }
 
 function calculerTotal(prix, tip, nbrPersonne) {
-	let total = 0;
-
-	return total;
+	return (prix + prix * tip) / nbrPersonne;
 }
 
-inputPrix.addEventListener("input", () => {
-	prix = Number(inputPrix.value);
+function mettreAJourAffichage() {
+	if (prix <= 0 || nombrePersonne <= 0 || tip < 0) {
+		TipAmount2.textContent = "$0.00";
+		TipAmount1.textContent = "$0.00";
+		return;
+	}
 
-	if (prix < 0 || nombrePersonne <= 0 || tip < 0) return;
+	const tipAmount = calculerTipAmount(prix, tip, nombrePersonne);
+	const total = calculerTotal(prix, tip, nombrePersonne);
 
-	const tipAmount = calculerTipAmoutn(prix, tip, nombrePersonne);
+	TipAmount2.textContent = "$" + tipAmount.toFixed(2);
+	TipAmount1.textContent = "$" + total.toFixed(2);
+}
 
-	TipAmount2.textContent = tipAmount;
-});
+function activerBouton(index) {
+	for (let i = 0; i < tipButtons.length; i++) {
+		tipButtons[i].classList.remove("active");
+		tipButtons[i].classList.remove("btn-color");
+	}
+	if (index !== -1) {
+		tipButtons[index].classList.add("active");
+		tipButtons[index].classList.add("btn-color");
+	}
+}
 
-buttonTip1.addEventListener("click", () => {
-	tip = 5 / 100;
-
-	console.log(prix, tip);
-});
-
-buttonTip2.addEventListener("click", () => {
-	tip = 10 / 100;
-
-	console.log(prix, tip);
-});
-
-buttonTip3.addEventListener("click", () => {
-	tip = 15 / 100;
-
-	console.log(prix, tip);
-});
-
-buttonTip4.addEventListener("click", () => {
-	tip = 25 / 100;
-
-	console.log(prix, tip);
-});
-
-buttonTip5.addEventListener("click", () => {
-	tip = 50 / 100;
-
-	console.log(prix, tip);
-});
+for (let i = 0; i < tipButtons.length; i++) {
+	(function (index) {
+		tipButtons[index].addEventListener("click", () => {
+			tip = tipValues[index] / 100;
+			inputTip6.value = "";
+			activerBouton(index);
+			mettreAJourAffichage();
+		});
+	})(i);
+}
 
 inputTip6.addEventListener("input", () => {
 	let valeur = Number(inputTip6.value);
@@ -77,11 +70,49 @@ inputTip6.addEventListener("input", () => {
 		valeur = 100;
 		inputTip6.value = valeur;
 	}
-	tip = valeur / 100;
 
-	console.log(prix, tip);
+	tip = valeur / 100;
+	activerBouton(-1);
+	mettreAJourAffichage();
+});
+
+inputPrix.addEventListener("input", () => {
+	prix = Number(inputPrix.value);
+	mettreAJourAffichage();
 });
 
 inputdvalue.addEventListener("input", () => {
 	nombrePersonne = Number(inputdvalue.value);
+
+	const errorMsg = document.querySelector("#errorPersonne");
+	const inputDiv = inputdvalue.closest(".input");
+	if (nombrePersonne === 0 && inputdvalue.value !== "") {
+		errorMsg.style.visibility = "visible";
+		inputDiv.classList.add("input-error");
+	} else {
+		errorMsg.style.visibility = "hidden";
+		inputDiv.classList.remove("input-error");
+	}
+	mettreAJourAffichage();
+});
+
+resetBtn.addEventListener("click", () => {
+	prix = 0;
+	tip = 0;
+	nombrePersonne = 0;
+
+	inputPrix.value = "";
+	inputdvalue.value = "";
+	inputTip6.value = "";
+
+	activerBouton(-1);
+
+	TipAmount2.textContent = "$0.00";
+	TipAmount1.textContent = "$0.00";
+});
+
+inputdvalue.addEventListener("change", () => {
+	resetBtn.removeAttribute("disabled");
+
+	resetBtn.classList.add("reste-color");
 });
